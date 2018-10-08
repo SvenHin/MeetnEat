@@ -14,8 +14,26 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/phone"
+        android:id="@+id/address"
         app:layout_constraintTop_toBottomOf="@id/name"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/phone"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/type"
+        app:layout_constraintTop_toBottomOf="@id/phone"
+        />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id"
+        app:layout_constraintTop_toBottomOf="@id/type"
         />
     <Button
         android:id="@+id/add"
@@ -23,7 +41,54 @@
         android:layout_height="wrap_content"
         android:text="Add"
         android:onClick="add"
-        app:layout_constraintTop_toBottomOf="@id/phone"/>
+        app:layout_constraintTop_toBottomOf="@id/id"/>
+
+    <Button
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List"
+        android:onClick="listAll"
+        app:layout_constraintTop_toBottomOf="@id/add"/>
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:onClick="delete"
+        app:layout_constraintTop_toBottomOf="@id/list"/>
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:onClick="update"
+        app:layout_constraintTop_toBottomOf="@id/delete"/>
+
+    <Button
+        android:id="@+id/num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Number of people"
+        android:onClick="numberOfPeople"
+        app:layout_constraintTop_toBottomOf="@id/update"/>
+
+    <Button
+        android:id="@+id/find"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find a person"
+        android:onClick="findAPerson"
+        app:layout_constraintTop_toBottomOf="@id/num"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view"
+        app:layout_constraintTop_toBottomOf="@id/find"
+        />
 
 
 </android.support.constraint.ConstraintLayout>

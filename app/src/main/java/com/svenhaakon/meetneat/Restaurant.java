@@ -1,15 +1,22 @@
 package com.svenhaakon.meetneat;
 
 public class Restaurant {
-    long ID;
-    String name;
-    String adress;
-    String phone;
-    String type;
+    private long _ID;
+    private String name;
+    private String adress;
+    private String phone;
+    private String type;
 
-    public Restaurant(long ID, String name, String adress, String phone, String type) {
+    public Restaurant(String name, String adress, String phone, String type) {
+        this.name = name;
+        this.adress = adress;
+        this.phone = phone;
+        this.type = type;
+    }
 
-        this.ID = ID;
+    public Restaurant(long _ID, String name, String adress, String phone, String type) {
+
+        this._ID = _ID;
         this.name = name;
         this.adress = adress;
         this.phone = phone;
@@ -33,8 +40,8 @@ public class Restaurant {
 
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public void set_ID(long _ID) {
+        this._ID = _ID;
     }
 
     public void setName(String name) {
@@ -53,9 +60,9 @@ public class Restaurant {
         this.type = type;
     }
 
-    public long getID() {
+    public long get_ID() {
 
-        return ID;
+        return _ID;
     }
 
     public String getName() {
