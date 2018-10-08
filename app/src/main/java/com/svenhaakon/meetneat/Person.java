@@ -18,7 +18,6 @@ public class Person {
 
         this.name = name;
         this.phone = phone;
-        Log.d("Friend constructor", "Name: " + name + " Phone: " + phone);
     }
 
     public Person() {
@@ -33,11 +32,9 @@ public class Person {
         this.name = name;
     }
 
-
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
     public long get_ID() {
         return _ID;
@@ -46,7 +43,6 @@ public class Person {
     public String getName() {
         return name;
     }
-
 
     public String getPhone() {
         return phone;

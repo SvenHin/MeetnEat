@@ -7,16 +7,15 @@ public class Restaurant {
     private String phone;
     private String type;
 
-    public Restaurant(String name, String adress, String phone, String type) {
+    public Restaurant(long _ID, String name, String adress, String phone, String type) {
+        this._ID = _ID;
         this.name = name;
         this.adress = adress;
         this.phone = phone;
         this.type = type;
     }
 
-    public Restaurant(long _ID, String name, String adress, String phone, String type) {
-
-        this._ID = _ID;
+    public Restaurant(String name, String adress, String phone, String type) {
         this.name = name;
         this.adress = adress;
         this.phone = phone;
@@ -61,7 +60,6 @@ public class Restaurant {
     }
 
     public long get_ID() {
-
         return _ID;
     }
 
