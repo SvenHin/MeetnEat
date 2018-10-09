@@ -3,21 +3,25 @@ package com.svenhaakon.meetneat;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ActionMenuView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Activity {
-    EditText nameIn, addressIn, phoneIn, typeIn, idIn;
-    TextView print;
+    //XML fields
+    ListView reservationList;
+
+    //Database variable
     DbHandler db;
 
 
@@ -25,17 +29,19 @@ public class Main extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Set the top toolbar as the actionbar
         Toolbar mainToolbar = findViewById(R.id.main_toolbar);
         setActionBar(mainToolbar);
 
-        nameIn = findViewById(R.id.name);
-        phoneIn = findViewById(R.id.phone);
-        addressIn = findViewById(R.id.address);
-        print = findViewById(R.id.view);
+        //Define XML fields
+        reservationList = findViewById(R.id.listViewReservations);
 
-
-
+        //Define Database handler
         db = new DbHandler(this);
+
+        //Will populate the listview with people from Person table
+        populateList();
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -62,6 +68,8 @@ public class Main extends Activity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.menu_add:
+                Intent i = new Intent(this, ReservationAdder.class);
+                this.startActivity(i);
                 break;
             case R.id.menu_appointments:
                 break;
@@ -79,17 +87,45 @@ public class Main extends Activity {
         return true;
     }
 
-    public void add(View v){
-        Person person = new Person(nameIn.getText().toString(),phoneIn.getText().toString());
-        db.addPerson(person);
+    /** ListView initializer **/
+    public void populateList(){
+
+        //Define an arraylist and copy all names from a list from database
+        final ArrayList<String> dateList = new ArrayList<>();
+        List<Reservation> list = db.getAllReservations();
+        for(Reservation reservation : list){
+            dateList.add(reservation.getDate());
+        }
+
+        //ArrayAdapter
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, dateList);
+        reservationList.setAdapter(arrayAdapter);
+
+        //Put an onclick event on each element in list
+        reservationList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            // argument position gives the index of which element is clicked
+            public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
+            {
+                String selectedReservation = dateList.get(position);
+                Toast.makeText(getApplicationContext(), "Person Selected : " + selectedReservation,   Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    /*public void add(View v){
+        //Person person = new Person(nameIn.getText().toString(),phoneIn.getText().toString());
+
+        Reservation reservation = new Reservation(Integer.valueOf(nameIn.getText().toString()),Integer.valueOf(addressIn.getText().toString()),phoneIn.getText().toString(),typeIn.getText().toString());
+        db.addReservation(reservation);
     }
 
     public void listAll(View v) {
         String string = "";
-        List<Restaurant> restaurants = db.getAllRestaurants();
-        for (Restaurant restaurant : restaurants) {
-            string = string + "Id: " + restaurant.get_ID() + ",Name: " + restaurant.getName() + " ,Address: " + restaurant.getAdress() + " ,Phone: " + restaurant.getPhone() + " ,Type: " + restaurant.getType();
-            Log.d("Name: ", string);
+        List<Reservation> reservations = db.getAllReservations();
+        for (Reservation reservation : reservations) {
+            string = string + "Id: " + reservation.get_ID() + ",Res_Id: " + reservation.getRestaurant_ID() + " ,Per_Id: " + reservation.getPerson_ID() + " ,Date: " + reservation.getDate() + " ,Time: " + reservation.getTime();
         }
         print.setText(string);
     }
@@ -117,7 +153,7 @@ public class Main extends Activity {
         Restaurant restaurant = db.findRestaurant(Integer.valueOf(idIn.getText().toString()));
         String string = "Id: " + restaurant.get_ID() + ",Name: " + restaurant.getName() + " ,Address: " + restaurant.getAdress() + " ,Phone: " + restaurant.getPhone() + " ,Type: " + restaurant.getType();
         print.setText(string);
-    }
+    }*/
 
 
 }

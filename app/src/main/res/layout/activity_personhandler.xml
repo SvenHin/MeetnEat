@@ -13,7 +13,7 @@
 
         <TextView
             style="@style/ToolbarTitle"
-            android:text="@string/personhandler_title"
+            android:text="@string/per_handler_title"
             />
     </Toolbar>
 
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@id/personhandler_toolbar"
         app:layout_constraintBottom_toTopOf="@id/nav_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:dividerHeight="0.1dp"
         >
     </ListView>

@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">MeetnEat</string>
-    <string name="personhandler_title">Your friends</string>
+    <string name="per_handler_title">Your friends</string>
+    <string name="res_add_title">Add a reservation</string>
+    <string name="res_add_restaurantname">Restaurant id:</string>
+    <string name="res_add_date">Date:</string>
+    <string name="res_add_time">Time:</string>
+    <string name="res_add_people">Friend id:</string>
+    <string name="res_add_btn">Register</string>
+
+    <string name="per_add_title">Add a friend</string>
+    <string name="per_add_name">Friend name:</string>
+    <string name="per_add_phone">Phone:</string>
+    <string name="per_add_btn">Register</string>
+
 </resources>

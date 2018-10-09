@@ -18,9 +18,20 @@
         </activity>
         <activity android:name=".PersonHandler">
             <intent-filter>
-                <action android:name="android.intent.action.PERSONHANDLER" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"
+                    android:parentActivityName=".Main"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".PersonAdder">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                    android:parentActivityName=".Main"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ReservationAdder">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                    android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
     </application>

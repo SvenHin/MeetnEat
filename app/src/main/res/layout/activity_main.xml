@@ -21,6 +21,17 @@
         android:id="@+id/nav_toolbar"
         layout="@layout/navtoolbar" />
 
+    <ListView
+        android:id="@+id/listViewReservations"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/nav_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:dividerHeight="0.1dp"
+        >
+    </ListView>
+
+    <!--
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,27 +50,27 @@
         android:id="@+id/phone"
         app:layout_constraintTop_toBottomOf="@id/address"
         />
-    <!--
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/type"
         app:layout_constraintTop_toBottomOf="@id/phone"
         />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/id"
         app:layout_constraintTop_toBottomOf="@id/type"
         />
-    -->
+
     <Button
         android:id="@+id/add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add"
         android:onClick="add"
-        app:layout_constraintTop_toBottomOf="@id/phone"/>
+        app:layout_constraintTop_toBottomOf="@id/type"/>
 
     <Button
         android:id="@+id/list"
@@ -68,7 +79,6 @@
         android:text="List"
         android:onClick="listAll"
         app:layout_constraintTop_toBottomOf="@id/add"/>
-
     <Button
         android:id="@+id/delete"
         android:layout_width="match_parent"
@@ -105,8 +115,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/view"
-        app:layout_constraintTop_toBottomOf="@id/find"
+        app:layout_constraintTop_toBottomOf="@id/list"
         />
-
+    -->
 
 </android.support.constraint.ConstraintLayout>
