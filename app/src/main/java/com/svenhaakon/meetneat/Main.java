@@ -24,7 +24,6 @@ public class Main extends Activity {
     //Database variable
     DbHandler db;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +39,38 @@ public class Main extends Activity {
         //Define Database handler
         db = new DbHandler(this);
 
-        //Will populate the listview with people from Person table
+        //Will populate the listview with reservations from Reservation table
         populateList();
     }
 
+    /** ListView initializer **/
+    public void populateList(){
+
+        //Define an arraylist and copy all names from a list from database
+        final ArrayList<String> dateList = new ArrayList<>();
+        List<Reservation> list = db.getAllReservations();
+        for(Reservation reservation : list){
+            dateList.add(reservation.getDate());
+        }
+
+        //ArrayAdapter
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, dateList);
+        reservationList.setAdapter(arrayAdapter);
+
+        //Put an onclick event on each element in list
+        reservationList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            // argument position gives the index of which element is clicked
+            public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
+            {
+                String selectedReservation = dateList.get(position);
+                Toast.makeText(getApplicationContext(), "Person Selected : " + selectedReservation,   Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -85,33 +112,6 @@ public class Main extends Activity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
-    }
-
-    /** ListView initializer **/
-    public void populateList(){
-
-        //Define an arraylist and copy all names from a list from database
-        final ArrayList<String> dateList = new ArrayList<>();
-        List<Reservation> list = db.getAllReservations();
-        for(Reservation reservation : list){
-            dateList.add(reservation.getDate());
-        }
-
-        //ArrayAdapter
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, dateList);
-        reservationList.setAdapter(arrayAdapter);
-
-        //Put an onclick event on each element in list
-        reservationList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            // argument position gives the index of which element is clicked
-            public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
-            {
-                String selectedReservation = dateList.get(position);
-                Toast.makeText(getApplicationContext(), "Person Selected : " + selectedReservation,   Toast.LENGTH_LONG).show();
-            }
-        });
-
     }
 
     /*public void add(View v){

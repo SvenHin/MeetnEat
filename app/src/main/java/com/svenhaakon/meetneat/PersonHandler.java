@@ -26,7 +26,6 @@ public class PersonHandler extends Activity {
     //Database variable
     DbHandler db;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
