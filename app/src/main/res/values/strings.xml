@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MeetnEat</string>
+    <string name="personhandler_title">Your friends</string>
 </resources>

@@ -8,39 +8,74 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ActionMenuView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Main extends Activity {
+public class PersonHandler extends Activity {
     EditText nameIn, addressIn, phoneIn, typeIn, idIn;
     TextView print;
+    ListView peopleList;
     DbHandler db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar mainToolbar = findViewById(R.id.main_toolbar);
-        setActionBar(mainToolbar);
+        setContentView(R.layout.activity_personhandler);
+        Toolbar personhandlerToolbar = findViewById(R.id.personhandler_toolbar);
+        setActionBar(personhandlerToolbar);
 
-        nameIn = findViewById(R.id.name);
+        peopleList = findViewById(R.id.listViewPeople);
+        /*nameIn = findViewById(R.id.name);
         phoneIn = findViewById(R.id.phone);
         addressIn = findViewById(R.id.address);
-        print = findViewById(R.id.view);
-
-
-
+        typeIn = findViewById(R.id.type);
+        idIn = findViewById(R.id.id);
+        print = findViewById(R.id.view);*/
         db = new DbHandler(this);
+
+        populateList();
+
+
     }
 
+    /** ListView initializer **/
+    public void populateList(){
+        final ArrayList<String> nameList = new ArrayList<>();
+        List<Person> list = db.getAllPeople();
+        Log.d("Populate", "in populate");
+        for(Person person : list){
+            Log.d("Populate", person.getName());
+            nameList.add(person.getName());
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, nameList);
+        peopleList.setAdapter(arrayAdapter);
+
+        peopleList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            // argument position gives the index of item which is clicked
+            public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
+            {
+
+                String selectedPerson = nameList.get(position);
+                Toast.makeText(getApplicationContext(), "Person Selected : " + selectedPerson,   Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.personhandler_menu, menu);
 
         //Inflate bottom toolbar
         Toolbar navToolbar = findViewById(R.id.nav_toolbar);
@@ -64,12 +99,12 @@ public class Main extends Activity {
             case R.id.menu_add:
                 break;
             case R.id.menu_appointments:
+                Intent e = new Intent(this, Main.class);
+                this.startActivity(e);
                 break;
             case R.id.menu_restaurants:
                 break;
             case R.id.menu_people:
-                Intent e = new Intent(this, PersonHandler.class);
-                this.startActivity(e);
                 break;
             case R.id.menu_settings:
                 break;
@@ -79,9 +114,11 @@ public class Main extends Activity {
         return true;
     }
 
+
+
     public void add(View v){
-        Person person = new Person(nameIn.getText().toString(),phoneIn.getText().toString());
-        db.addPerson(person);
+        Restaurant restaurant = new Restaurant(nameIn.getText().toString(),addressIn.getText().toString(),phoneIn.getText().toString(), typeIn.getText().toString());
+        db.addRestaurant(restaurant);
     }
 
     public void listAll(View v) {

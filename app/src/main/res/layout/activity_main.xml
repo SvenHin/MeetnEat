@@ -6,10 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Main">
 
+    <Toolbar
+        android:id="@+id/main_toolbar"
+        style="@style/Toolbar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/ToolbarTitle"
+            android:text="@string/app_name"
+            />
+    </Toolbar>
+
+    <include
+        android:id="@+id/nav_toolbar"
+        layout="@layout/navtoolbar" />
+
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/name"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
     />
     <EditText
         android:layout_width="wrap_content"
@@ -23,6 +40,7 @@
         android:id="@+id/phone"
         app:layout_constraintTop_toBottomOf="@id/address"
         />
+    <!--
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,13 +53,14 @@
         android:id="@+id/id"
         app:layout_constraintTop_toBottomOf="@id/type"
         />
+    -->
     <Button
         android:id="@+id/add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add"
         android:onClick="add"
-        app:layout_constraintTop_toBottomOf="@id/id"/>
+        app:layout_constraintTop_toBottomOf="@id/phone"/>
 
     <Button
         android:id="@+id/list"
