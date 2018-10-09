@@ -32,14 +32,7 @@ public class PersonHandler extends Activity {
         setContentView(R.layout.activity_personhandler);
         Toolbar personhandlerToolbar = findViewById(R.id.personhandler_toolbar);
         setActionBar(personhandlerToolbar);
-
         peopleList = findViewById(R.id.listViewPeople);
-        /*nameIn = findViewById(R.id.name);
-        phoneIn = findViewById(R.id.phone);
-        addressIn = findViewById(R.id.address);
-        typeIn = findViewById(R.id.type);
-        idIn = findViewById(R.id.id);
-        print = findViewById(R.id.view);*/
         db = new DbHandler(this);
 
         populateList();
@@ -49,22 +42,24 @@ public class PersonHandler extends Activity {
 
     /** ListView initializer **/
     public void populateList(){
+
+        //Define an arraylist and copy all names from a list from database
         final ArrayList<String> nameList = new ArrayList<>();
         List<Person> list = db.getAllPeople();
-        Log.d("Populate", "in populate");
         for(Person person : list){
-            Log.d("Populate", person.getName());
             nameList.add(person.getName());
         }
+
+        //ArrayAdapter
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, nameList);
         peopleList.setAdapter(arrayAdapter);
 
+        //Put an onclick event on each element in list
         peopleList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
-            // argument position gives the index of item which is clicked
+            // argument position gives the index of which element is clicked
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
-
                 String selectedPerson = nameList.get(position);
                 Toast.makeText(getApplicationContext(), "Person Selected : " + selectedPerson,   Toast.LENGTH_LONG).show();
             }
