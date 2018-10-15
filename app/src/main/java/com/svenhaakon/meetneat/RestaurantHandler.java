@@ -8,18 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main extends Activity {
+public class RestaurantHandler extends Activity {
     //XML fields
-    ListView reservationList;
+    ListView restaurantList;
 
     //Database variable
     DbHandler db;
@@ -27,27 +25,30 @@ public class Main extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_restauranthandler);
 
         //Set the top toolbar as the actionbar
-        Toolbar mainToolbar = findViewById(R.id.main_toolbar);
-        setActionBar(mainToolbar);
+        Toolbar restauranthandlerToolbar = findViewById(R.id.restauranthandler_toolbar);
+        setActionBar(restauranthandlerToolbar);
 
         //Define XML fields
-        reservationList = findViewById(R.id.listViewReservations);
+        restaurantList = findViewById(R.id.listViewRestaurants);
 
         //Define Database handler
         db = new DbHandler(this);
 
-        //Will populate the listview with reservations from Reservation table
+        //Will populate the listview with people from Restaurant table
         populateList();
+
+
     }
-    //Refreshes view if reservation has been added to database
+
+    //Refreshes view if restaurant has been added to database
     @Override
     protected void onResume() {
         super.onResume();
-        if(ReservationAdder.hasAdded){
-            ReservationAdder.hasAdded = false;
+        if(RestaurantAdder.hasAdded){
+            RestaurantAdder.hasAdded = false;
             this.recreate();
         }
     }
@@ -56,24 +57,24 @@ public class Main extends Activity {
     public void populateList(){
 
         //Define an arraylist and copy all names from a list from database
-        final ArrayList<String> dateList = new ArrayList<>();
-        List<Reservation> list = db.getAllReservations();
-        for(Reservation reservation : list){
-            dateList.add(reservation.getDate());
+        final ArrayList<String> nameList = new ArrayList<>();
+        List<Restaurant> list = db.getAllRestaurants();
+        for(Restaurant restaurant : list){
+            nameList.add(restaurant.getName());
         }
 
         //ArrayAdapter
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, dateList);
-        reservationList.setAdapter(arrayAdapter);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, nameList);
+        restaurantList.setAdapter(arrayAdapter);
 
         //Put an onclick event on each element in list
-        reservationList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        restaurantList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             // argument position gives the index of which element is clicked
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
-                String selectedReservation = dateList.get(position);
-                Toast.makeText(getApplicationContext(), "Person Selected : " + selectedReservation,   Toast.LENGTH_LONG).show();
+                String selectedRestaurant = nameList.get(position);
+                Toast.makeText(getApplicationContext(), "Restaurant Selected : " + selectedRestaurant,   Toast.LENGTH_LONG).show();
             }
         });
 
@@ -82,13 +83,14 @@ public class Main extends Activity {
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.restauranthandler_menu, menu);
 
-        //Inflate bottom toolbar
+        //Define and inflate bottom toolbar
         Toolbar navToolbar = findViewById(R.id.nav_toolbar);
         Menu bottomMenu = navToolbar.getMenu();
         getMenuInflater().inflate(R.menu.nav_menu, bottomMenu);
 
+        //Include items in bottom toolbar in onOptionsItemSelected
         for (int i = 0; i < bottomMenu.size(); i++) {
             bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
@@ -103,19 +105,15 @@ public class Main extends Activity {
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menu_add:
-                Intent i = new Intent(this, ReservationAdder.class);
-                this.startActivity(i);
+            case R.id.menu_addrestaurant:
+                Intent e = new Intent(this, RestaurantAdder.class);
+                this.startActivity(e);
                 break;
             case R.id.menu_appointments:
                 break;
             case R.id.menu_restaurants:
-                Intent j = new Intent(this, RestaurantHandler.class);
-                this.startActivity(j);
                 break;
             case R.id.menu_people:
-                Intent e = new Intent(this, PersonHandler.class);
-                this.startActivity(e);
                 break;
             case R.id.menu_settings:
                 break;
@@ -125,18 +123,19 @@ public class Main extends Activity {
         return true;
     }
 
-    /*public void add(View v){
-        //Person person = new Person(nameIn.getText().toString(),phoneIn.getText().toString());
 
-        Reservation reservation = new Reservation(Integer.valueOf(nameIn.getText().toString()),Integer.valueOf(addressIn.getText().toString()),phoneIn.getText().toString(),typeIn.getText().toString());
-        db.addReservation(reservation);
+
+    /*public void add(View v){
+        Restaurant restaurant = new Restaurant(nameIn.getText().toString(),addressIn.getText().toString(),phoneIn.getText().toString(), typeIn.getText().toString());
+        db.addRestaurant(restaurant);
     }
 
     public void listAll(View v) {
         String string = "";
-        List<Reservation> reservations = db.getAllReservations();
-        for (Reservation reservation : reservations) {
-            string = string + "Id: " + reservation.get_ID() + ",Res_Id: " + reservation.getRestaurant_ID() + " ,Per_Id: " + reservation.getPerson_ID() + " ,Date: " + reservation.getDate() + " ,Time: " + reservation.getTime();
+        List<Restaurant> restaurants = db.getAllRestaurants();
+        for (Restaurant restaurant : restaurants) {
+            string = string + "Id: " + restaurant.get_ID() + ",Name: " + restaurant.getName() + " ,Address: " + restaurant.getAdress() + " ,Phone: " + restaurant.getPhone() + " ,Type: " + restaurant.getType();
+            Log.d("Name: ", string);
         }
         print.setText(string);
     }
@@ -164,7 +163,7 @@ public class Main extends Activity {
         Restaurant restaurant = db.findRestaurant(Integer.valueOf(idIn.getText().toString()));
         String string = "Id: " + restaurant.get_ID() + ",Name: " + restaurant.getName() + " ,Address: " + restaurant.getAdress() + " ,Phone: " + restaurant.getPhone() + " ,Type: " + restaurant.getType();
         print.setText(string);
-    }*/
+    }
 
-
+    */
 }

@@ -28,6 +28,18 @@
                     android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
+        <activity android:name=".RestaurantHandler">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                    android:parentActivityName=".Main"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".RestaurantAdder">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                    android:parentActivityName=".Main"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".ReservationAdder">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Toolbar
+        android:id="@+id/restaurantadder_toolbar"
+        style="@style/Toolbar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/ToolbarTitle"
+            android:text="@string/rest_add_title"
+            />
+    </Toolbar>
+
+    <include
+        android:id="@+id/nav_toolbar"
+        layout="@layout/navtoolbar" />
+
+
+    <TextView
+        android:id="@+id/rest_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/restaurantadder_toolbar"
+        android:text="@string/rest_add_restaurantname"
+        />
+
+    <EditText
+        android:id="@+id/rest_add_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_name"
+        />
+
+    <TextView
+        android:id="@+id/rest_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_add_name"
+        android:text="@string/rest_add_address"
+        />
+
+
+
+    <EditText
+        android:id="@+id/rest_add_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_address"
+        />
+
+    <TextView
+        android:id="@+id/rest_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_add_address"
+        android:text="@string/rest_add_phone"
+        />
+
+
+
+    <EditText
+        android:id="@+id/rest_add_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_phone"
+        />
+
+
+    <TextView
+        android:id="@+id/rest_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_add_phone"
+        android:text="@string/rest_add_type"
+        />
+
+
+
+    <EditText
+        android:id="@+id/rest_add_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_type"
+        />
+
+
+
+    <Button
+        android:id="@+id/rest_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rest_add_btn"
+        app:layout_constraintTop_toBottomOf="@id/rest_add_type"
+        android:onClick="addRestaurant"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RestaurantHandler">
+
+    <Toolbar
+        android:id="@+id/restauranthandler_toolbar"
+        style="@style/Toolbar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/ToolbarTitle"
+            android:text="@string/rest_handler_title"
+            />
+    </Toolbar>
+
+    <include
+        android:id="@+id/nav_toolbar"
+        layout="@layout/navtoolbar" />
+
+    <ListView
+        android:id="@+id/listViewRestaurants"
+        app:layout_constraintTop_toBottomOf="@id/restauranthandler_toolbar"
+        app:layout_constraintBottom_toTopOf="@id/nav_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:dividerHeight="0.1dp"
+        >
+    </ListView>
+
+
+
+</android.support.constraint.ConstraintLayout>

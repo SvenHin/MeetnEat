@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toolbar;
 
-public class ReservationAdder extends Activity {
+public class RestaurantAdder extends Activity {
 
     static boolean hasAdded = false;
 
     //XML fields
-    private EditText res_add_name, res_add_date, res_add_time, res_add_people;
+    private EditText rest_add_name, rest_add_type, rest_add_address, rest_add_phone;
 
     //Database variable
     DbHandler db;
@@ -22,17 +22,17 @@ public class ReservationAdder extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservationadder);
+        setContentView(R.layout.activity_restaurantadder);
 
         //Set the top toolbar as the actionbar
-        Toolbar reservationAdderToolbar = findViewById(R.id.reservationadder_toolbar);
+        Toolbar reservationAdderToolbar = findViewById(R.id.restaurantadder_toolbar);
         setActionBar(reservationAdderToolbar);
 
         //Define XML fields
-        res_add_name = findViewById(R.id.res_add_name);
-        res_add_date = findViewById(R.id.res_add_date);
-        res_add_time = findViewById(R.id.res_add_time);
-        res_add_people = findViewById(R.id.res_add_people);
+        rest_add_name = findViewById(R.id.rest_add_name);
+        rest_add_type = findViewById(R.id.rest_add_type);
+        rest_add_address = findViewById(R.id.rest_add_address);
+        rest_add_phone = findViewById(R.id.rest_add_phone);
 
         //Define Database adder
         db = new DbHandler(this);
@@ -44,7 +44,7 @@ public class ReservationAdder extends Activity {
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.reservationadder_menu, menu);
+        getMenuInflater().inflate(R.menu.restaurantadder_menu, menu);
 
         //Define and inflate bottom toolbar
         Toolbar navToolbar = findViewById(R.id.nav_toolbar);
@@ -81,9 +81,9 @@ public class ReservationAdder extends Activity {
 
 
     //Adds a reservation to the databse from the input fields
-    public void addReservation(View v){
-        Reservation reservation = new Reservation(Integer.valueOf(res_add_name.getText().toString()),Integer.valueOf(res_add_people.getText().toString()),res_add_date.getText().toString(),res_add_time.getText().toString());
-        db.addReservation(reservation);
+    public void addRestaurant(View v){
+        Restaurant restaurant = new Restaurant(rest_add_name.getText().toString(),rest_add_address.getText().toString(),rest_add_phone.getText().toString(),rest_add_type.getText().toString());
+        db.addRestaurant(restaurant);
         hasAdded = true;
     }
 
