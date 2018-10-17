@@ -59,9 +59,9 @@ public class Main extends Activity {
 
         //Define an arraylist and copy all names from a list from database
         final ArrayList<String> dateList = new ArrayList<>();
-        List<Reservation> list = db.getAllReservations();
+        final List<Reservation> list = db.getAllReservations();
         for(Reservation reservation : list){
-            dateList.add(reservation.getDate());
+            dateList.add(db.findRestaurant((int) reservation.get_ID()).getName());
         }
 
         //ArrayAdapter
@@ -75,7 +75,14 @@ public class Main extends Activity {
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
                 String selectedReservation = dateList.get(position);
-                Toast.makeText(getApplicationContext(), "Person Selected : " + selectedReservation,   Toast.LENGTH_LONG).show();
+                Reservation reservation = list.get(position);
+                Intent intent = new Intent(Main.this, ReservationInfo.class);
+                intent.putExtra("ResID", reservation.get_ID());
+                intent.putExtra("ResName", db.findRestaurant((int) reservation.get_ID()).getName());
+                intent.putExtra("ResDate", reservation.getDate());
+                intent.putExtra("ResTime", reservation.getTime());
+                Main.this.startActivity(intent);
+                //Toast.makeText(getApplicationContext(), "Reservation Selected : " + selectedReservation,   Toast.LENGTH_LONG).show();
             }
         });
 

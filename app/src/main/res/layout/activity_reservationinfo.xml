@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReservationAdder">
+
+    <Toolbar
+        android:id="@+id/reservationinfo_toolbar"
+        style="@style/Toolbar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/ToolbarTitle"
+            android:text="@string/res_info_title"
+            />
+    </Toolbar>
+
+    <include
+        android:id="@+id/nav_toolbar"
+        layout="@layout/navtoolbar" />
+
+
+    <TextView
+        android:id="@+id/res_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/reservationinfo_toolbar"
+        android:text="@string/res_add_restaurantname"
+        />
+
+    <TextView
+        android:id="@+id/res_info_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/res_name"
+        />
+
+    <TextView
+        android:id="@+id/res_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/res_info_name"
+        android:text="@string/res_add_date"
+        />
+
+    <TextView
+        android:id="@+id/res_info_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/res_date"
+        />
+
+
+    <TextView
+        android:id="@+id/res_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/res_info_date"
+        android:text="@string/res_add_time"
+        />
+
+    <TextView
+        android:id="@+id/res_info_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/res_time"
+        />
+
+    <TextView
+        android:id="@+id/res_people"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/res_info_time"
+        android:text="@string/res_add_people"
+        />
+
+    <TextView
+        android:id="@+id/res_info_people"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/res_people"
+        />
+
+    <Button
+        android:id="@+id/res_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/res_add_btn"
+        app:layout_constraintTop_toBottomOf="@id/res_info_people"
+        />
+
+
+
+</android.support.constraint.ConstraintLayout>

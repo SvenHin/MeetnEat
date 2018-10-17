@@ -46,6 +46,12 @@
                     android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ReservationInfo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                    android:parentActivityName=".Main"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
