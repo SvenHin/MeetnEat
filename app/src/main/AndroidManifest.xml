@@ -46,6 +46,19 @@
                     android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
+        <activity android:name=".Settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                    android:parentActivityName=".Main"/>
+            </intent-filter>
+        </activity>
+        <service android:name=".NotificationService"></service>
+        <service android:name=".SetPeriodicService"></service>
+        <receiver android:name=".MainBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.svenhaakon.meetneat.broadcast"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

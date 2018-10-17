@@ -1,6 +1,11 @@
 package com.svenhaakon.meetneat;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,6 +85,20 @@ public class PersonAdder extends Activity {
 
     //Adds a reservation to the databse from the input fields
     public void addPerson(View v){
+
+        //ALARMSTOPPER
+        //Intent i = new Intent(this, NotificationService.class);
+        //PendingIntent pintent = PendingIntent.getService(this,0,i,0);
+        //AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        //if(alarm!=null){
+        //    alarm.cancel(pintent);
+        //}
+        //ALARMSTARTER
+        //Intent intent = new Intent();
+        //intent.setAction("com.svenhaakon.meetneat.broadcast");
+        //sendBroadcast(intent);
+
+
         Person person = new Person(per_add_name.getText().toString(),per_add_phone.getText().toString());
         db.addPerson(person);
         hasAdded = true;

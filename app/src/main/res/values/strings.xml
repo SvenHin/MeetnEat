@@ -18,5 +18,8 @@
     <string name="per_add_name">Friend name:</string>
     <string name="per_add_phone">Phone:</string>
     <string name="per_add_btn">Register</string>
+    <string name="setting_title">Preferences</string>
+    <string name="pref_onoff_btn">SMS Service</string>
+    <string name="pref_time_setting">Notification Time</string>
 
 </resources>

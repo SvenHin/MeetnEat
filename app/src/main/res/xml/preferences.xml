@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="notificationPref"
+        android:title="@string/pref_time_setting"
+        android:defaultValue="1000"
+        />
+
+    <CheckBoxPreference
+        android:key="onOffPref"
+        android:title="@string/pref_onoff_btn"
+        android:defaultValue="true"
+        />
+</PreferenceScreen>

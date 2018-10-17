@@ -3,6 +3,7 @@ package com.svenhaakon.meetneat;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ public class Main extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         //Set the top toolbar as the actionbar
         Toolbar mainToolbar = findViewById(R.id.main_toolbar);
@@ -118,6 +120,8 @@ public class Main extends Activity {
                 this.startActivity(e);
                 break;
             case R.id.menu_settings:
+                Intent o = new Intent(this, Settings.class);
+                this.startActivity(o);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
