@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.svenhaakon.meetneat">
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,34 +23,40 @@
         <activity android:name=".PersonHandler">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
-                    android:parentActivityName=".Main"/>
+                android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
         <activity android:name=".PersonAdder">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
-                    android:parentActivityName=".Main"/>
+                android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
         <activity android:name=".RestaurantHandler">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
-                    android:parentActivityName=".Main"/>
+                android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
         <activity android:name=".RestaurantAdder">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
-                    android:parentActivityName=".Main"/>
+                android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
         <activity android:name=".ReservationAdder">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
-                    android:parentActivityName=".Main"/>
+                android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
         <activity android:name=".ReservationInfo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"
+                android:parentActivityName=".Main"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".PersonInfo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
                     android:parentActivityName=".Main"/>
@@ -55,16 +65,18 @@
         <activity android:name=".Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
-                    android:parentActivityName=".Main"/>
+                android:parentActivityName=".Main"/>
             </intent-filter>
         </activity>
         <service android:name=".NotificationService"></service>
         <service android:name=".SetPeriodicService"></service>
         <receiver android:name=".MainBroadcastReceiver">
             <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="com.svenhaakon.meetneat.broadcast"/>
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

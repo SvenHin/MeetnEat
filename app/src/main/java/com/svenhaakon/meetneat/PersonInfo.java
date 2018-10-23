@@ -9,12 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-public class ReservationInfo extends Activity {
+public class PersonInfo extends Activity {
 
 
     //XML fields
-    private TextView res_name, res_date, res_time, res_people ;
-    private EditText res_info_name, res_info_date, res_info_time, res_info_people;
+    private TextView per_name, per_phone;
+    private EditText per_info_name, per_info_phone;
 
     //Database variable
     DbHandler db;
@@ -23,30 +23,23 @@ public class ReservationInfo extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservationinfo);
+        setContentView(R.layout.activity_personinfo);
 
         //Set the top toolbar as the actionbar
-        Toolbar reservationAdderToolbar = findViewById(R.id.reservationinfo_toolbar);
-        setActionBar(reservationAdderToolbar);
+        Toolbar personAdderToolbar = findViewById(R.id.personinfo_toolbar);
+        setActionBar(personAdderToolbar);
 
         //Define XML fields
-        res_name = findViewById(R.id.res_name);
-        res_date = findViewById(R.id.res_date);
-        res_time = findViewById(R.id.res_time);
-        res_people = findViewById(R.id.res_people);
-        res_info_name = findViewById(R.id.res_info_name);
-        res_info_date = findViewById(R.id.res_info_date);
-        res_info_time = findViewById(R.id.res_info_time);
-        res_info_people = findViewById(R.id.res_info_people);
+        per_name = findViewById(R.id.per_name);
+        per_phone = findViewById(R.id.per_phone);
+        per_info_name = findViewById(R.id.per_info_name);
+        per_info_phone = findViewById(R.id.per_info_phone);
 
         //Define Database adder
         db = new DbHandler(this);
 
-        String restname = db.findRestaurant((int)getIntent().getLongExtra("RestID", 0)).getName();
-        res_info_name.setText(restname);
-        res_info_date.setText(getIntent().getStringExtra("ResDate"));
-        res_info_time.setText(getIntent().getStringExtra("ResTime"));
-        res_info_people.setText(db.findPerson((int)getIntent().getLongExtra("PerID", 0)).getName());
+        per_info_name.setText(getIntent().getStringExtra("PerName"));
+        per_info_phone.setText(getIntent().getStringExtra("PerPhone"));
 
     }
 
@@ -88,14 +81,11 @@ public class ReservationInfo extends Activity {
         return true;
     }
 
-    public void updateReservation(View v) {
-        Reservation reservation = new Reservation();
-        reservation.setRestaurant_ID(db.findRestaurant(Integer.valueOf(res_info_name.getText().toString())).get_ID());
-        reservation.set_ID(getIntent().getLongExtra("ResID", 0));
-        reservation.setPerson_ID(db.findPerson(Integer.valueOf(res_info_people.getText().toString())).get_ID());
-
-        reservation.setDate(res_info_date.getText().toString());
-        reservation.setTime(res_info_time.getText().toString());
-        db.updateReservation(reservation);
+    public void updatePerson(View v) {
+        Person person = new Person();
+        person.set_ID(getIntent().getLongExtra("PerID", 0));
+        person.setName(per_info_name.getText().toString());
+        person.setPhone(per_info_phone.getText().toString());
+        db.updatePerson(person);
     }
 }

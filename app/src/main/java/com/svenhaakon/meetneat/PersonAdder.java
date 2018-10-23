@@ -99,9 +99,11 @@ public class PersonAdder extends Activity {
         //sendBroadcast(intent);
 
 
+
         Person person = new Person(per_add_name.getText().toString(),per_add_phone.getText().toString());
         db.addPerson(person);
         hasAdded = true;
+
     }
 
 /*    public void listAll(View v) {

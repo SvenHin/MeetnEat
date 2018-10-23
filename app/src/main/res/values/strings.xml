@@ -2,11 +2,14 @@
     <string name="app_name">MeetnEat</string>
     <string name="per_handler_title">Your friends</string>
     <string name="res_info_title">Your Reservation</string>
+    <string name="per_info_title">Person</string>
+    <string name="per_info_btn">Update</string>
+
     <string name="res_add_title">Add a reservation</string>
     <string name="res_add_restaurantname">Restaurant Name:</string>
     <string name="res_add_date">Date:</string>
     <string name="res_add_time">Time:</string>
-    <string name="res_add_people">Friend id:</string>
+    <string name="res_add_people">Friend name:</string>
     <string name="res_add_btn">Edit/Save</string>
     <string name="rest_add_title">Add a restaurant</string>
     <string name="rest_add_restaurantname">Restaurant Name:</string>

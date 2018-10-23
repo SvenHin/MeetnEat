@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PersonInfo">
+
+    <Toolbar
+        android:id="@+id/personinfo_toolbar"
+        style="@style/Toolbar"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/ToolbarTitle"
+            android:text="@string/per_info_title"
+            />
+    </Toolbar>
+
+    <include
+        android:id="@+id/nav_toolbar"
+        layout="@layout/navtoolbar" />
+
+
+    <TextView
+        android:id="@+id/per_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/personinfo_toolbar"
+        android:text="@string/per_add_name"
+        />
+
+
+    <EditText
+        android:id="@+id/per_info_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/per_name"
+        />
+
+    <TextView
+        android:id="@+id/per_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/per_info_name"
+        android:text="@string/per_add_phone"
+        />
+
+    <EditText
+        android:id="@+id/per_info_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/per_phone"
+        />
+
+    <Button
+        android:id="@+id/per_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/per_info_btn"
+        android:onClick="updatePerson"
+        app:layout_constraintTop_toBottomOf="@id/per_info_phone"
+        />
+
+
+
+</android.support.constraint.ConstraintLayout>

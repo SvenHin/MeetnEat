@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.widget.Toast;
 
+
 public class NotificationService extends Service {
 
     @Override
@@ -17,7 +18,6 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         Toast.makeText(getApplicationContext(), "I MinService", Toast.LENGTH_SHORT).show();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Intent i = new Intent(this, PersonHandler.class);

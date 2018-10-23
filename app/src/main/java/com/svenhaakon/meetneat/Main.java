@@ -1,9 +1,13 @@
 package com.svenhaakon.meetneat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +26,10 @@ public class Main extends Activity {
     //XML fields
     ListView reservationList;
 
+    //Request variables
+    static int MY_PERMISSIONS_REQUEST_SEND_SMS;
+    static int MY_PHONE_STATE_PERMISSION;
+
     //Database variable
     DbHandler db;
 
@@ -34,6 +42,17 @@ public class Main extends Activity {
         //Set the top toolbar as the actionbar
         Toolbar mainToolbar = findViewById(R.id.main_toolbar);
         setActionBar(mainToolbar);
+
+        MY_PERMISSIONS_REQUEST_SEND_SMS = ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+        MY_PHONE_STATE_PERMISSION = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+        if(MY_PERMISSIONS_REQUEST_SEND_SMS == PackageManager.PERMISSION_GRANTED && MY_PHONE_STATE_PERMISSION == PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(this, "Har sendt sms", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.SEND_SMS,Manifest.permission.READ_PHONE_STATE}, 0);
+        }
+
 
         //Define XML fields
         reservationList = findViewById(R.id.listViewReservations);
@@ -74,7 +93,6 @@ public class Main extends Activity {
             // argument position gives the index of which element is clicked
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
-                String selectedReservation = dateList.get(position);
                 Reservation reservation = list.get(position);
                 Intent intent = new Intent(Main.this, ReservationInfo.class);
                 intent.putExtra("ResID", reservation.get_ID());

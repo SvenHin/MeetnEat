@@ -62,7 +62,7 @@ public class PersonHandler extends Activity {
 
         //Define an arraylist and copy all names from a list from database
         final ArrayList<String> nameList = new ArrayList<>();
-        List<Person> list = db.getAllPeople();
+        final List<Person> list = db.getAllPeople();
         for(Person person : list){
             nameList.add(person.getName());
         }
@@ -77,8 +77,12 @@ public class PersonHandler extends Activity {
             // argument position gives the index of which element is clicked
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
-                String selectedPerson = nameList.get(position);
-                Toast.makeText(getApplicationContext(), "Person Selected : " + selectedPerson,   Toast.LENGTH_LONG).show();
+                Person person = list.get(position);
+                Intent intent = new Intent(PersonHandler.this, PersonInfo.class);
+                intent.putExtra("PerID", person.get_ID());
+                intent.putExtra("PerName", person.getName());
+                intent.putExtra("PerPhone", person.getPhone());
+                PersonHandler.this.startActivity(intent);
             }
         });
 
