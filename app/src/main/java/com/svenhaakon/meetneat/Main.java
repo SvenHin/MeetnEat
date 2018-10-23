@@ -78,7 +78,8 @@ public class Main extends Activity {
                 Reservation reservation = list.get(position);
                 Intent intent = new Intent(Main.this, ReservationInfo.class);
                 intent.putExtra("ResID", reservation.get_ID());
-                intent.putExtra("ResName", db.findRestaurant((int) reservation.get_ID()).getName());
+                intent.putExtra("RestID", reservation.getRestaurant_ID());
+                intent.putExtra("PerID", reservation.getPerson_ID());
                 intent.putExtra("ResDate", reservation.getDate());
                 intent.putExtra("ResTime", reservation.getTime());
                 Main.this.startActivity(intent);

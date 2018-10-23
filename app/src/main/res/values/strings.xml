@@ -7,9 +7,9 @@
     <string name="res_add_date">Date:</string>
     <string name="res_add_time">Time:</string>
     <string name="res_add_people">Friend id:</string>
-    <string name="res_add_btn">Register</string>
+    <string name="res_add_btn">Edit/Save</string>
     <string name="rest_add_title">Add a restaurant</string>
-    <string name="rest_add_restaurantname">Restaurant id:</string>
+    <string name="rest_add_restaurantname">Restaurant Name:</string>
     <string name="rest_add_address">Address:</string>
     <string name="rest_add_type">Type:</string>
     <string name="rest_add_phone">Phone:</string>

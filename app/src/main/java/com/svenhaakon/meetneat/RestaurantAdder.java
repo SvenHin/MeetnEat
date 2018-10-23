@@ -85,6 +85,7 @@ public class RestaurantAdder extends Activity {
         Restaurant restaurant = new Restaurant(rest_add_name.getText().toString(),rest_add_address.getText().toString(),rest_add_phone.getText().toString(),rest_add_type.getText().toString());
         db.addRestaurant(restaurant);
         hasAdded = true;
+
     }
 
 /*    public void listAll(View v) {

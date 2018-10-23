@@ -13,7 +13,8 @@ public class ReservationInfo extends Activity {
 
 
     //XML fields
-    private TextView res_name, res_date, res_time, res_people, res_info_name, res_info_date, res_info_time, res_info_people;
+    private TextView res_name, res_date, res_time, res_people ;
+    private EditText res_info_name, res_info_date, res_info_time, res_info_people;
 
     //Database variable
     DbHandler db;
@@ -42,9 +43,10 @@ public class ReservationInfo extends Activity {
         db = new DbHandler(this);
 
 
-        res_info_name.setText(getIntent().getStringExtra("ResName"));
+        res_info_name.setText(db.findRestaurant((int) Long.parseLong(getIntent().getStringExtra("RestID"))).getName());
         res_info_date.setText(getIntent().getStringExtra("ResDate"));
         res_info_time.setText(getIntent().getStringExtra("ResTime"));
+        res_info_people.setText(getIntent().getStringExtra("PerID"));
 
     }
 
@@ -84,5 +86,15 @@ public class ReservationInfo extends Activity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    public void updateReservation(View v) {
+        Reservation reservation = new Reservation();
+        reservation.setRestaurant_ID(Long.parseLong(getIntent().getStringExtra("RestID")));
+        reservation.set_ID(Long.parseLong(getIntent().getStringExtra("ResID")));
+        reservation.setPerson_ID(Long.parseLong(getIntent().getStringExtra("PerID")));
+        //reservation.setDate(res_info_date.getText().toString());
+        //reservation.setTime(res_info_time.getText().toString());
+        db.updateReservation(reservation);
     }
 }

@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class ReservationAdder extends Activity {
@@ -85,7 +86,9 @@ public class ReservationAdder extends Activity {
         Reservation reservation = new Reservation(Integer.valueOf(res_add_name.getText().toString()),Integer.valueOf(res_add_people.getText().toString()),res_add_date.getText().toString(),res_add_time.getText().toString());
         db.addReservation(reservation);
         hasAdded = true;
+        Toast.makeText(getApplicationContext(), "Reservation created",   Toast.LENGTH_LONG).show();
     }
+
 
 /*    public void listAll(View v) {
         String string = "";
@@ -102,15 +105,7 @@ public class ReservationAdder extends Activity {
         db.deleteRestaurant(personId);
     }
 
-    public void update(View v) {
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName(nameIn.getText().toString());
-        restaurant.setAdress(addressIn.getText().toString());
-        restaurant.setPhone(phoneIn.getText().toString());
-        restaurant.setType(typeIn.getText().toString());
-        restaurant.set_ID(Long.parseLong(idIn.getText().toString()));
-        db.updateRestaurant(restaurant);
-    }
+
 
     public void numberOfPeople(View v) {
         print.setText(String.valueOf(db.numberOfRestaurants()));
