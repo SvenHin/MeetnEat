@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReservationInfo">
+    tools:context=".RestaurantInfo">
 
     <Toolbar
-        android:id="@+id/reservationinfo_toolbar"
+        android:id="@+id/restaurantinfo_toolbar"
         style="@style/Toolbar"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             style="@style/ToolbarTitle"
-            android:text="@string/res_info_title"
+            android:text="@string/rest_title"
             />
     </Toolbar>
 
@@ -23,73 +23,74 @@
 
 
     <TextView
-        android:id="@+id/res_name"
+        android:id="@+id/rest_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/reservationinfo_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/restaurantinfo_toolbar"
         android:text="@string/res_add_restaurantname"
         />
 
+
     <EditText
-        android:id="@+id/res_info_name"
+        android:id="@+id/rest_info_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/res_name"
+        app:layout_constraintTop_toBottomOf="@id/rest_name"
         />
 
     <TextView
-        android:id="@+id/res_date"
+        android:id="@+id/rest_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/res_info_name"
-        android:text="@string/res_add_date"
+        app:layout_constraintTop_toBottomOf="@id/rest_info_name"
+        android:text="@string/rest_add_address"
         />
 
     <EditText
-        android:id="@+id/res_info_date"
+        android:id="@+id/rest_info_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/res_date"
+        app:layout_constraintTop_toBottomOf="@id/rest_address"
+        />
+
+    <TextView
+        android:id="@+id/rest_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_info_address"
+        android:text="@string/rest_add_phone"
+        />
+
+    <EditText
+        android:id="@+id/rest_info_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rest_phone"
         />
 
 
     <TextView
-        android:id="@+id/res_time"
+        android:id="@+id/rest_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/res_info_date"
-        android:text="@string/res_add_time"
+        app:layout_constraintTop_toBottomOf="@id/rest_info_phone"
+        android:text="@string/rest_add_type"
         />
 
     <EditText
-        android:id="@+id/res_info_time"
+        android:id="@+id/rest_info_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/res_time"
-        />
-
-    <TextView
-        android:id="@+id/res_people"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/res_info_time"
-        android:text="@string/res_add_people"
-        />
-
-    <EditText
-        android:id="@+id/res_info_people"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/res_people"
+        app:layout_constraintTop_toBottomOf="@id/rest_type"
         />
 
     <Button
-        android:id="@+id/res_add_btn"
+        android:id="@+id/rest_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/updateBtn"
-        android:onClick="updateReservation"
-        app:layout_constraintTop_toBottomOf="@id/res_info_people"
+        android:onClick="updateRestaurant"
+        app:layout_constraintTop_toBottomOf="@id/rest_info_type"
         />
 
 

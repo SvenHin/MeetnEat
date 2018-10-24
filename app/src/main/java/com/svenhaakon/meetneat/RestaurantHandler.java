@@ -58,7 +58,7 @@ public class RestaurantHandler extends Activity {
 
         //Define an arraylist and copy all names from a list from database
         final ArrayList<String> nameList = new ArrayList<>();
-        List<Restaurant> list = db.getAllRestaurants();
+        final List<Restaurant> list = db.getAllRestaurants();
         for(Restaurant restaurant : list){
             nameList.add(restaurant.getName());
         }
@@ -73,8 +73,14 @@ public class RestaurantHandler extends Activity {
             // argument position gives the index of which element is clicked
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
-                String selectedRestaurant = nameList.get(position);
-                Toast.makeText(getApplicationContext(), "Restaurant Selected : " + selectedRestaurant,   Toast.LENGTH_LONG).show();
+                Restaurant restaurant = list.get(position);
+                Intent intent = new Intent(RestaurantHandler.this, RestaurantInfo.class);
+                intent.putExtra("RestID", restaurant.get_ID());
+                intent.putExtra("RestName", restaurant.getName());
+                intent.putExtra("RestAddress", restaurant.getAdress());
+                intent.putExtra("RestPhone", restaurant.getPhone());
+                intent.putExtra("RestType", restaurant.getType());
+                RestaurantHandler.this.startActivity(intent);
             }
         });
 

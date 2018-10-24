@@ -4,7 +4,7 @@
     <string name="res_info_title">Your Reservation</string>
     <string name="per_info_title">Person</string>
     <string name="per_info_btn">Update</string>
-
+    <string name="updateBtn">Update</string>
     <string name="res_add_title">Add a reservation</string>
     <string name="res_add_restaurantname">Restaurant Name:</string>
     <string name="res_add_date">Date:</string>
@@ -19,6 +19,7 @@
     <string name="rest_add_btn">Add Restaurant</string>
     <string name="rest_handler_title">Your restaurants</string>
     <string name="per_add_title">Add a friend</string>
+    <string name="rest_title">Update Restaurant</string>
     <string name="per_add_name">Friend name:</string>
     <string name="per_add_phone">Phone:</string>
     <string name="per_add_btn">Register</string>
