@@ -1,5 +1,6 @@
 package com.svenhaakon.meetneat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,13 @@ public class PersonHandler extends Activity {
         Toolbar personhandlerToolbar = findViewById(R.id.personhandler_toolbar);
         setActionBar(personhandlerToolbar);
 
+        //HomeButton
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.baseline_arrow_back_white_36dp);
+
+
+
         //Define XML fields
         peopleList = findViewById(R.id.listViewPeople);
 
@@ -46,6 +54,12 @@ public class PersonHandler extends Activity {
 
 
     }
+
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
 
     //Refreshes view if person has been added to database
     @Override
@@ -124,6 +138,9 @@ public class PersonHandler extends Activity {
             case R.id.menu_people:
                 break;
             case R.id.menu_settings:
+                break;
+            case android.R.id.home:
+                onSupportNavigateUp();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

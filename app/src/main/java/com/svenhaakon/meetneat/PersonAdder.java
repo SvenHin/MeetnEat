@@ -1,5 +1,6 @@
 package com.svenhaakon.meetneat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -32,6 +33,12 @@ public class PersonAdder extends Activity {
         Toolbar personAdderToolbar = findViewById(R.id.personadder_toolbar);
         setActionBar(personAdderToolbar);
 
+        //HomeButton
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.baseline_arrow_back_white_36dp);
+
+
         //Define XML fields
         per_add_name = findViewById(R.id.per_add_name);
         per_add_phone = findViewById(R.id.per_add_phone);
@@ -42,6 +49,11 @@ public class PersonAdder extends Activity {
 
 
 
+    }
+    //Close current activity Back button
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     /** Menu Methods **/
@@ -75,6 +87,9 @@ public class PersonAdder extends Activity {
             case R.id.menu_people:
                 break;
             case R.id.menu_settings:
+                break;
+            case android.R.id.home:
+                onSupportNavigateUp();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

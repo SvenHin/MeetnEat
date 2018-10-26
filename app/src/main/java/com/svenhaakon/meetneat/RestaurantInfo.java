@@ -1,5 +1,6 @@
 package com.svenhaakon.meetneat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +30,11 @@ public class RestaurantInfo extends Activity {
         Toolbar restaurantToolbar = findViewById(R.id.restaurantinfo_toolbar);
         setActionBar(restaurantToolbar);
 
+        //HomeButton
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.baseline_arrow_back_white_36dp);
+
         //Define XML fields
         rest_name = findViewById(R.id.rest_name);
         rest_address = findViewById(R.id.rest_address);
@@ -47,6 +53,11 @@ public class RestaurantInfo extends Activity {
         rest_info_phone.setText(getIntent().getStringExtra("RestPhone"));
         rest_info_type.setText(getIntent().getStringExtra("RestType"));
 
+    }
+
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     /** Menu Methods **/
@@ -80,6 +91,9 @@ public class RestaurantInfo extends Activity {
             case R.id.menu_people:
                 break;
             case R.id.menu_settings:
+                break;
+            case android.R.id.home:
+                onSupportNavigateUp();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

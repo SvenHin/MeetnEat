@@ -1,5 +1,6 @@
 package com.svenhaakon.meetneat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,6 +40,11 @@ public class ReservationInfo extends Activity {
         res_info_time = findViewById(R.id.res_info_time);
         res_info_people = findViewById(R.id.res_info_people);
 
+        //HomeButton
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.baseline_arrow_back_white_36dp);
+
         //Define Database adder
         db = new DbHandler(this);
 
@@ -48,6 +54,11 @@ public class ReservationInfo extends Activity {
         res_info_time.setText(getIntent().getStringExtra("ResTime"));
         res_info_people.setText(db.findPerson((int)getIntent().getLongExtra("PerID", 0)).getName());
 
+    }
+
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     /** Menu Methods **/
@@ -81,6 +92,9 @@ public class ReservationInfo extends Activity {
             case R.id.menu_people:
                 break;
             case R.id.menu_settings:
+                break;
+            case android.R.id.home:
+                onSupportNavigateUp();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
