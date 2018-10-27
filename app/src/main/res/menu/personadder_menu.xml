@@ -7,4 +7,6 @@
         android:title="Add Person"
         android:showAsAction="ifRoom" />
     -->
+    <item name="android:homeAsUpIndicator">@mipmap/baseline_arrow_back_white_36dp</item>
+
 </menu>

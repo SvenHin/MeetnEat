@@ -1,5 +1,6 @@
 package com.svenhaakon.meetneat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +30,11 @@ public class PersonInfo extends Activity {
         Toolbar personAdderToolbar = findViewById(R.id.personinfo_toolbar);
         setActionBar(personAdderToolbar);
 
+        //HomeButton
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.baseline_arrow_back_white_36dp);
+
         //Define XML fields
         per_name = findViewById(R.id.per_name);
         per_phone = findViewById(R.id.per_phone);
@@ -42,6 +48,15 @@ public class PersonInfo extends Activity {
         per_info_phone.setText(getIntent().getStringExtra("PerPhone"));
 
     }
+
+
+
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
+
 
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
@@ -74,6 +89,9 @@ public class PersonInfo extends Activity {
             case R.id.menu_people:
                 break;
             case R.id.menu_settings:
+                break;
+            case android.R.id.home:
+                onSupportNavigateUp();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

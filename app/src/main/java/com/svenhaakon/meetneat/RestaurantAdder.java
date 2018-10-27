@@ -1,5 +1,6 @@
 package com.svenhaakon.meetneat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,6 +29,11 @@ public class RestaurantAdder extends Activity {
         Toolbar reservationAdderToolbar = findViewById(R.id.restaurantadder_toolbar);
         setActionBar(reservationAdderToolbar);
 
+        //HomeButton
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.mipmap.baseline_arrow_back_white_36dp);
+
         //Define XML fields
         rest_add_name = findViewById(R.id.rest_add_name);
         rest_add_type = findViewById(R.id.rest_add_type);
@@ -39,6 +45,11 @@ public class RestaurantAdder extends Activity {
 
 
 
+    }
+
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     /** Menu Methods **/
@@ -72,6 +83,9 @@ public class RestaurantAdder extends Activity {
             case R.id.menu_people:
                 break;
             case R.id.menu_settings:
+                break;
+            case android.R.id.home:
+                onSupportNavigateUp();
                 break;
             default:
                 return super.onOptionsItemSelected(item);
