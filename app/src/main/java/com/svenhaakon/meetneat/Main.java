@@ -42,17 +42,16 @@ public class Main extends Activity {
         //Set the top toolbar as the actionbar
         Toolbar mainToolbar = findViewById(R.id.main_toolbar);
         setActionBar(mainToolbar);
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString("SMS", "You have an appointment with x today.").apply();
 
         MY_PERMISSIONS_REQUEST_SEND_SMS = ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
         MY_PHONE_STATE_PERMISSION = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
         if(MY_PERMISSIONS_REQUEST_SEND_SMS == PackageManager.PERMISSION_GRANTED && MY_PHONE_STATE_PERMISSION == PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(this, "Har sendt sms", Toast.LENGTH_SHORT).show();
         }
         else{
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.SEND_SMS,Manifest.permission.READ_PHONE_STATE}, 0);
         }
-
 
         //Define XML fields
         reservationList = findViewById(R.id.listViewReservations);
@@ -80,7 +79,7 @@ public class Main extends Activity {
         final ArrayList<String> dateList = new ArrayList<>();
         final List<Reservation> list = db.getAllReservations();
         for(Reservation reservation : list){
-            dateList.add(db.findRestaurant((int) reservation.get_ID()).getName());
+            dateList.add(db.findRestaurant((int) reservation.getRestaurant_ID()).getName());
         }
 
         //ArrayAdapter

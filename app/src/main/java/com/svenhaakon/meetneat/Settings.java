@@ -1,12 +1,14 @@
 package com.svenhaakon.meetneat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.widget.Toolbar;
 
@@ -29,6 +31,7 @@ public class Settings extends Activity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+            findPreference("notificationPref").setSummary(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("notificationPref", ""));
         }
 
         @Override
@@ -36,11 +39,11 @@ public class Settings extends Activity {
             if (key.equals("notificationPref")) {
                 Preference pref = findPreference(key);
                 pref.setSummary(sharedPreferences.getString(key, ""));
-                //if(sharedPreferences.getString(key, "").equals("Deutsch")){
-                //    ((Settings) getActivity()).setLocale("de");
-                //}
-                //else  ((Settings) getActivity()).setLocale("no");
+
+                Intent i = new Intent(getActivity(), SetPeriodicService.class);
+                getActivity().startService(i);
             }
+
         }
 
         @Override

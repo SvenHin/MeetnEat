@@ -3,7 +3,7 @@
     <EditTextPreference
         android:key="notificationPref"
         android:title="@string/pref_time_setting"
-        android:defaultValue="1000"
+        android:defaultValue="19:00"
         />
 
     <CheckBoxPreference
