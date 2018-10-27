@@ -28,6 +28,10 @@
     <string name="pref_time_setting">Notification Time</string>
     <string name="toolbar_add">Add</string>
     <string name="toolbar_delete">Delete</string>
+    <string name="deleteDialogOk">Delete</string>
+    <string name="deleteDialogNotOk">Back</string>
+    <string name="deleteDialog">Are you sure you want to delete?</string>
+
 
 
 </resources>

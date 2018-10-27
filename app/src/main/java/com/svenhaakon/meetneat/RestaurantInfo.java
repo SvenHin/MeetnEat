@@ -2,6 +2,7 @@ package com.svenhaakon.meetneat;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-public class RestaurantInfo extends Activity {
+public class RestaurantInfo extends Activity implements DeleteDialog.DialogClickListener{
 
     //XML fields
     private EditText rest_info_name, rest_info_address, rest_info_phone, rest_info_type;
@@ -54,6 +55,18 @@ public class RestaurantInfo extends Activity {
         finish();
         return true;
     }
+    @Override
+    public void onYesClick() {
+        deleteRestaurant();
+    }
+    @Override
+    public void onNoClick() {
+        return;
+    }
+    public void showDeleteDialog(){
+        DialogFragment dialog = new DeleteDialog();
+        dialog.show(getFragmentManager(),"Delete");
+    }
 
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
@@ -68,7 +81,7 @@ public class RestaurantInfo extends Activity {
                 updateRestaurant();
                 break;
             case R.id.menu_delete:
-                deleteRestaurant();
+                showDeleteDialog();
                 break;
             case android.R.id.home:
                 onSupportNavigateUp();

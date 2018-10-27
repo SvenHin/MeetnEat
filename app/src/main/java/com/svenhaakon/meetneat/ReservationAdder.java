@@ -77,11 +77,42 @@ public class ReservationAdder extends Activity {
 
     //Adds a reservation to the databse from the input fields
     public void addReservation(){
-        Reservation reservation = new Reservation(Integer.valueOf(res_add_name.getText().toString()),Integer.valueOf(res_add_people.getText().toString()),res_add_date.getText().toString(),res_add_time.getText().toString());
-        db.addReservation(reservation);
+        Reservation reservation = new Reservation();
+
+        //Find id from restaurant name
+        boolean foundRest = false;
+        for(Restaurant res :db.getAllRestaurants()){
+            if(res.getName().equals(res_add_name.getText().toString())){
+                reservation.setRestaurant_ID(res.get_ID());
+                foundRest = true;
+            }
+        }
+
+        if(!foundRest){
+            Toast.makeText(this, "Could not find restaurant", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //Find id from friend name
+        boolean foundPers = false;
+        for(Person person :db.getAllPeople()){
+            if(person.getName().equals(res_add_people.getText().toString())){
+                reservation.setPerson_ID(person.get_ID());
+                foundPers = true;
+            }
+        }
+
+        if(!foundPers){
+            Toast.makeText(this, "Could not find person", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        reservation.set_ID(getIntent().getLongExtra("ResID", 0));
+        reservation.setDate(res_add_date.getText().toString());
+        reservation.setTime(res_add_time.getText().toString());
+        db.updateReservation(reservation);
 
         Main.hasAdded = true;
-        Toast.makeText(getApplicationContext(), "Reservation created",   Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Added reservation", Toast.LENGTH_SHORT).show();
         finish();
     }
 

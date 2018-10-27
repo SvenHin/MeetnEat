@@ -2,6 +2,7 @@ package com.svenhaakon.meetneat;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-public class PersonInfo extends Activity {
+public class PersonInfo extends Activity implements DeleteDialog.DialogClickListener{
 
     //XML fields
     private EditText per_info_name, per_info_phone;
@@ -52,6 +53,18 @@ public class PersonInfo extends Activity {
         finish();
         return true;
     }
+    @Override
+    public void onYesClick() {
+        deletePerson();
+    }
+    @Override
+    public void onNoClick() {
+        return;
+    }
+    public void showDeleteDialog(){
+        DialogFragment dialog = new DeleteDialog();
+        dialog.show(getFragmentManager(),"Delete");
+    }
 
 
 
@@ -68,7 +81,7 @@ public class PersonInfo extends Activity {
                 updatePerson();
                 break;
             case R.id.menu_delete:
-                deletePerson();
+                showDeleteDialog();
                 break;
             case android.R.id.home:
                 onSupportNavigateUp();
