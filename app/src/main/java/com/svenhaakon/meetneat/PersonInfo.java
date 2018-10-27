@@ -8,13 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class PersonInfo extends Activity {
 
-
     //XML fields
-    private TextView per_name, per_phone;
     private EditText per_info_name, per_info_phone;
 
     //Database variable
@@ -36,8 +35,6 @@ public class PersonInfo extends Activity {
         actionBar.setHomeAsUpIndicator(R.mipmap.baseline_arrow_back_white_36dp);
 
         //Define XML fields
-        per_name = findViewById(R.id.per_name);
-        per_phone = findViewById(R.id.per_phone);
         per_info_name = findViewById(R.id.per_info_name);
         per_info_phone = findViewById(R.id.per_info_phone);
 
@@ -61,34 +58,17 @@ public class PersonInfo extends Activity {
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.reservationinfo_menu, menu);
-
-        //Define and inflate bottom toolbar
-        Toolbar navToolbar = findViewById(R.id.nav_toolbar);
-        Menu bottomMenu = navToolbar.getMenu();
-        getMenuInflater().inflate(R.menu.nav_menu, bottomMenu);
-
-        //Include items in bottom toolbar in onOptionsItemSelected
-        for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    return onOptionsItemSelected(item);
-                }
-            });
-        }
+        getMenuInflater().inflate(R.menu.info_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menu_appointments:
+            case R.id.menu_add:
+                updatePerson();
                 break;
-            case R.id.menu_restaurants:
-                break;
-            case R.id.menu_people:
-                break;
-            case R.id.menu_settings:
+            case R.id.menu_delete:
+                deletePerson();
                 break;
             case android.R.id.home:
                 onSupportNavigateUp();
@@ -99,11 +79,30 @@ public class PersonInfo extends Activity {
         return true;
     }
 
-    public void updatePerson(View v) {
+    public void updatePerson() {
         Person person = new Person();
         person.set_ID(getIntent().getLongExtra("PerID", 0));
         person.setName(per_info_name.getText().toString());
         person.setPhone(per_info_phone.getText().toString());
         db.updatePerson(person);
+
+        PersonHandler.hasAdded = true;
+        Toast.makeText(this, "Updated person", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+    public void deletePerson() {
+        Long perId = getIntent().getLongExtra("PerID", 0);
+        db.deletePerson(perId);
+
+        //Deleting all reservations the person was in
+        for(Reservation res : db.getAllReservations()){
+            if(res.getPerson_ID() == perId){
+                db.deleteReservation(res.get_ID());
+                Main.hasDeleted = true;
+            }
+        }
+        PersonHandler.hasAdded = true;
+        Toast.makeText(this, "Deleted person", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

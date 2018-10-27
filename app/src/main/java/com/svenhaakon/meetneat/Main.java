@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Activity {
+    public static boolean hasAdded = false;
+    public static boolean hasDeleted = false;
+
     //XML fields
     ListView reservationList;
 
@@ -66,8 +69,9 @@ public class Main extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(ReservationAdder.hasAdded){
-            ReservationAdder.hasAdded = false;
+        if(hasAdded || hasDeleted){
+            hasAdded = false;
+            hasDeleted = false;
             this.recreate();
         }
     }
@@ -170,10 +174,7 @@ public class Main extends Activity {
         print.setText(string);
     }
 
-    public void delete(View v) {
-        Long personId = (Long.parseLong(idIn.getText().toString()));
-        db.deleteRestaurant(personId);
-    }
+
 
     public void update(View v) {
         Restaurant restaurant = new Restaurant();

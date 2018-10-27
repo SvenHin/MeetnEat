@@ -7,11 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class RestaurantAdder extends Activity {
-
-    static boolean hasAdded = false;
 
     //XML fields
     private EditText rest_add_name, rest_add_type, rest_add_address, rest_add_phone;
@@ -55,34 +54,14 @@ public class RestaurantAdder extends Activity {
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.restaurantadder_menu, menu);
-
-        //Define and inflate bottom toolbar
-        Toolbar navToolbar = findViewById(R.id.nav_toolbar);
-        Menu bottomMenu = navToolbar.getMenu();
-        getMenuInflater().inflate(R.menu.nav_menu, bottomMenu);
-
-        //Include items in bottom toolbar in onOptionsItemSelected
-        for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    return onOptionsItemSelected(item);
-                }
-            });
-        }
+        getMenuInflater().inflate(R.menu.add_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menu_appointments:
-                break;
-            case R.id.menu_restaurants:
-                break;
-            case R.id.menu_people:
-                break;
-            case R.id.menu_settings:
+            case R.id.menu_add:
+                addRestaurant();
                 break;
             case android.R.id.home:
                 onSupportNavigateUp();
@@ -95,11 +74,13 @@ public class RestaurantAdder extends Activity {
 
 
     //Adds a reservation to the databse from the input fields
-    public void addRestaurant(View v){
+    public void addRestaurant(){
         Restaurant restaurant = new Restaurant(rest_add_name.getText().toString(),rest_add_address.getText().toString(),rest_add_phone.getText().toString(),rest_add_type.getText().toString());
         db.addRestaurant(restaurant);
-        hasAdded = true;
 
+        RestaurantHandler.hasAdded = true;
+        Toast.makeText(this, "Added restaurant", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
 /*    public void listAll(View v) {

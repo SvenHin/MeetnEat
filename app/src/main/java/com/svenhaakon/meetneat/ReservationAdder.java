@@ -12,9 +12,6 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class ReservationAdder extends Activity {
-
-    static boolean hasAdded = false;
-
     //XML fields
     private EditText res_add_name, res_add_date, res_add_time, res_add_people;
 
@@ -59,34 +56,14 @@ public class ReservationAdder extends Activity {
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.reservationadder_menu, menu);
-
-        //Define and inflate bottom toolbar
-        Toolbar navToolbar = findViewById(R.id.nav_toolbar);
-        Menu bottomMenu = navToolbar.getMenu();
-        getMenuInflater().inflate(R.menu.nav_menu, bottomMenu);
-
-        //Include items in bottom toolbar in onOptionsItemSelected
-        for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    return onOptionsItemSelected(item);
-                }
-            });
-        }
+        getMenuInflater().inflate(R.menu.add_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menu_appointments:
-                break;
-            case R.id.menu_restaurants:
-                break;
-            case R.id.menu_people:
-                break;
-            case R.id.menu_settings:
+            case R.id.menu_add:
+                addReservation();
                 break;
             case android.R.id.home:
                 onSupportNavigateUp();
@@ -99,11 +76,13 @@ public class ReservationAdder extends Activity {
 
 
     //Adds a reservation to the databse from the input fields
-    public void addReservation(View v){
+    public void addReservation(){
         Reservation reservation = new Reservation(Integer.valueOf(res_add_name.getText().toString()),Integer.valueOf(res_add_people.getText().toString()),res_add_date.getText().toString(),res_add_time.getText().toString());
         db.addReservation(reservation);
-        hasAdded = true;
+
+        Main.hasAdded = true;
         Toast.makeText(getApplicationContext(), "Reservation created",   Toast.LENGTH_LONG).show();
+        finish();
     }
 
 

@@ -28,6 +28,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/personinfo_toolbar"
         android:text="@string/per_add_name"
+        style="@style/InfoHeader"
+
         />
 
 
@@ -36,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/per_name"
+        style="@style/InfoEdit"
+
         />
 
     <TextView
@@ -44,6 +48,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/per_info_name"
         android:text="@string/per_add_phone"
+        style="@style/InfoHeader"
+
         />
 
     <EditText
@@ -51,16 +57,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/per_phone"
+        style="@style/InfoEdit"
+
         />
 
-    <Button
-        android:id="@+id/per_add_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/updateBtn"
-        android:onClick="updatePerson"
-        app:layout_constraintTop_toBottomOf="@id/per_info_phone"
-        />
 
 
 

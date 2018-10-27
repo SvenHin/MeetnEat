@@ -8,13 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class RestaurantInfo extends Activity {
 
-
     //XML fields
-    private TextView rest_name, rest_address, rest_phone, rest_type ;
     private EditText rest_info_name, rest_info_address, rest_info_phone, rest_info_type;
 
     //Database variable
@@ -36,10 +35,6 @@ public class RestaurantInfo extends Activity {
         actionBar.setHomeAsUpIndicator(R.mipmap.baseline_arrow_back_white_36dp);
 
         //Define XML fields
-        rest_name = findViewById(R.id.rest_name);
-        rest_address = findViewById(R.id.rest_address);
-        rest_phone = findViewById(R.id.rest_phone);
-        rest_type = findViewById(R.id.rest_type);
         rest_info_name = findViewById(R.id.rest_info_name);
         rest_info_address = findViewById(R.id.rest_info_address);
         rest_info_phone = findViewById(R.id.rest_info_phone);
@@ -63,34 +58,17 @@ public class RestaurantInfo extends Activity {
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.reservationinfo_menu, menu);
-
-        //Define and inflate bottom toolbar
-        Toolbar navToolbar = findViewById(R.id.nav_toolbar);
-        Menu bottomMenu = navToolbar.getMenu();
-        getMenuInflater().inflate(R.menu.nav_menu, bottomMenu);
-
-        //Include items in bottom toolbar in onOptionsItemSelected
-        for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    return onOptionsItemSelected(item);
-                }
-            });
-        }
+        getMenuInflater().inflate(R.menu.info_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menu_appointments:
+            case R.id.menu_add:
+                updateRestaurant();
                 break;
-            case R.id.menu_restaurants:
-                break;
-            case R.id.menu_people:
-                break;
-            case R.id.menu_settings:
+            case R.id.menu_delete:
+                deleteRestaurant();
                 break;
             case android.R.id.home:
                 onSupportNavigateUp();
@@ -101,7 +79,7 @@ public class RestaurantInfo extends Activity {
         return true;
     }
 
-    public void updateRestaurant(View v) {
+    public void updateRestaurant() {
         Restaurant restaurant = new Restaurant();
         restaurant.set_ID(getIntent().getLongExtra("RestID", 0));
         restaurant.setName(rest_info_name.getText().toString());
@@ -109,5 +87,24 @@ public class RestaurantInfo extends Activity {
         restaurant.setPhone(rest_info_phone.getText().toString());
         restaurant.setType(rest_info_type.getText().toString());
         db.updateRestaurant(restaurant);
+
+        RestaurantHandler.hasAdded = true;
+        Toast.makeText(this, "Updated restaurant", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+    public void deleteRestaurant() {
+        Long restId = getIntent().getLongExtra("RestID", 0);
+        db.deleteRestaurant(restId);
+
+        //Deleting all reservations the restaurant was in
+        for(Reservation res : db.getAllReservations()){
+            if(res.getRestaurant_ID() == restId){
+                db.deleteReservation(res.get_ID());
+                Main.hasDeleted = true;
+            }
+        }
+        RestaurantHandler.hasAdded = true;
+        Toast.makeText(this, "Deleted restaurant", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

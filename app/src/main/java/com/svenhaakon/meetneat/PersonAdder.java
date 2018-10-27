@@ -2,21 +2,15 @@ package com.svenhaakon.meetneat;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class PersonAdder extends Activity {
-    static boolean hasAdded = false;
-
     //XML fields
     private EditText per_add_name, per_add_phone;
 
@@ -59,34 +53,14 @@ public class PersonAdder extends Activity {
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.personadder_menu, menu);
-
-        //Define and inflate bottom toolbar
-        Toolbar navToolbar = findViewById(R.id.nav_toolbar);
-        Menu bottomMenu = navToolbar.getMenu();
-        getMenuInflater().inflate(R.menu.nav_menu, bottomMenu);
-
-        //Include items in bottom toolbar in onOptionsItemSelected
-        for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    return onOptionsItemSelected(item);
-                }
-            });
-        }
+        getMenuInflater().inflate(R.menu.add_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menu_appointments:
-                break;
-            case R.id.menu_restaurants:
-                break;
-            case R.id.menu_people:
-                break;
-            case R.id.menu_settings:
+            case R.id.menu_add:
+                addPerson();
                 break;
             case android.R.id.home:
                 onSupportNavigateUp();
@@ -99,20 +73,13 @@ public class PersonAdder extends Activity {
 
 
     //Adds a reservation to the databse from the input fields
-    public void addPerson(View v){
-
-
-        //ALARMSTARTER
-        Intent intent = new Intent();
-        intent.setAction("com.svenhaakon.meetneat.broadcast");
-        sendBroadcast(intent);
-
-
-/*
+    public void addPerson(){
         Person person = new Person(per_add_name.getText().toString(),per_add_phone.getText().toString());
         db.addPerson(person);
-        hasAdded = true;
-*/
+
+        PersonHandler.hasAdded = true;
+        Toast.makeText(this, "Added person", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
 /*    public void listAll(View v) {

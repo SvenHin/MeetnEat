@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonHandler extends Activity {
+    public static boolean hasAdded = false;
     //XML fields
     ListView peopleList;
 
@@ -65,8 +66,8 @@ public class PersonHandler extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(PersonAdder.hasAdded){
-            PersonAdder.hasAdded = false;
+        if(hasAdded){
+            hasAdded = false;
             this.recreate();
         }
     }
@@ -105,39 +106,15 @@ public class PersonHandler extends Activity {
     /** Menu Methods **/
     public boolean onCreateOptionsMenu(Menu menu){
         //Inflate top toolbar
-        getMenuInflater().inflate(R.menu.personhandler_menu, menu);
-
-        //Define and inflate bottom toolbar
-        Toolbar navToolbar = findViewById(R.id.nav_toolbar);
-        Menu bottomMenu = navToolbar.getMenu();
-        getMenuInflater().inflate(R.menu.nav_menu, bottomMenu);
-
-        //Include items in bottom toolbar in onOptionsItemSelected
-        for (int i = 0; i < bottomMenu.size(); i++) {
-            bottomMenu.getItem(i).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    return onOptionsItemSelected(item);
-                }
-            });
-        }
-
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
-            case R.id.menu_addperson:
+            case R.id.menu_add:
                 Intent e = new Intent(this, PersonAdder.class);
                 this.startActivity(e);
-                break;
-            case R.id.menu_appointments:
-                break;
-            case R.id.menu_restaurants:
-                break;
-            case R.id.menu_people:
-                break;
-            case R.id.menu_settings:
                 break;
             case android.R.id.home:
                 onSupportNavigateUp();

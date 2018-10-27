@@ -28,6 +28,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/restaurantinfo_toolbar"
         android:text="@string/res_add_restaurantname"
+        style="@style/InfoHeader"
+
         />
 
 
@@ -36,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rest_name"
+        style="@style/InfoEdit"
+
         />
 
     <TextView
@@ -44,6 +48,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rest_info_name"
         android:text="@string/rest_add_address"
+        style="@style/InfoHeader"
+
         />
 
     <EditText
@@ -51,6 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rest_address"
+        style="@style/InfoEdit"
+
         />
 
     <TextView
@@ -59,6 +67,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rest_info_address"
         android:text="@string/rest_add_phone"
+        style="@style/InfoHeader"
+
         />
 
     <EditText
@@ -66,6 +76,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rest_phone"
+        style="@style/InfoEdit"
+
         />
 
 
@@ -75,6 +87,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rest_info_phone"
         android:text="@string/rest_add_type"
+        style="@style/InfoHeader"
+
         />
 
     <EditText
@@ -82,16 +96,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/rest_type"
+        style="@style/InfoEdit"
+
         />
 
-    <Button
-        android:id="@+id/rest_add_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/updateBtn"
-        android:onClick="updateRestaurant"
-        app:layout_constraintTop_toBottomOf="@id/rest_info_type"
-        />
 
 
 
