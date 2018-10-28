@@ -102,6 +102,7 @@ public class RestaurantInfo extends Activity implements DeleteDialog.DialogClick
         db.updateRestaurant(restaurant);
 
         RestaurantHandler.hasAdded = true;
+        Main.hasAdded = true;
         Toast.makeText(this, "Updated restaurant", Toast.LENGTH_SHORT).show();
         finish();
     }

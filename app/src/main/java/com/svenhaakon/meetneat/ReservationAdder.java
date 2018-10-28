@@ -106,10 +106,9 @@ public class ReservationAdder extends Activity {
             Toast.makeText(this, "Could not find person", Toast.LENGTH_SHORT).show();
             return;
         }
-        reservation.set_ID(getIntent().getLongExtra("ResID", 0));
         reservation.setDate(res_add_date.getText().toString());
         reservation.setTime(res_add_time.getText().toString());
-        db.updateReservation(reservation);
+        db.addReservation(reservation);
 
         Main.hasAdded = true;
         Toast.makeText(this, "Added reservation", Toast.LENGTH_SHORT).show();

@@ -83,7 +83,8 @@ public class Main extends Activity {
         final ArrayList<String> dateList = new ArrayList<>();
         final List<Reservation> list = db.getAllReservations();
         for(Reservation reservation : list){
-            dateList.add(db.findRestaurant((int) reservation.getRestaurant_ID()).getName());
+            Restaurant restaurant = db.findRestaurant((int) reservation.getRestaurant_ID());
+            dateList.add( '\n' + restaurant.getName() + " with " + db.findPerson((int) reservation.getPerson_ID()).getName()+ '\n' + "Date: " + reservation.getDate()  + '\n' + "Time: " +reservation.getTime());
         }
 
         //ArrayAdapter
