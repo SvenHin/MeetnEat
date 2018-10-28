@@ -2,12 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_appointments"
-        android:icon="@mipmap/baseline_home_white_36"
-        android:title="Appointments"
-        android:showAsAction="always"
-        />
-    <item
         android:id="@+id/menu_restaurants"
         android:icon="@mipmap/baseline_restaurant_white_36"
         android:showAsAction="always"

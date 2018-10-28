@@ -61,7 +61,7 @@ public class NotificationService extends Service {
                     .setContentTitle("Appointment today!")
                     .setContentText("Appointment today at " + db.findRestaurant((int)res.getRestaurant_ID()).getName()
                     + " at " + res.getTime() + "with " + db.findPerson((int) res.getPerson_ID()).getName() + ".")
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.mipmap.pe_launcher_icon)
                     .setContentIntent(PendingIntent.getActivity(this, 0,
                             new Intent(this, PersonHandler.class), 0))
                     .build();

@@ -138,8 +138,6 @@ public class Main extends Activity {
                 Intent i = new Intent(this, ReservationAdder.class);
                 this.startActivity(i);
                 break;
-            case R.id.menu_appointments:
-                break;
             case R.id.menu_restaurants:
                 Intent j = new Intent(this, RestaurantHandler.class);
                 this.startActivity(j);

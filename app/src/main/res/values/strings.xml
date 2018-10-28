@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MeetnEat</string>
+    <string name="app_name">PlanEat</string>
     <string name="per_handler_title">Your friends</string>
     <string name="res_info_title">Your Reservation</string>
     <string name="per_info_title">Person</string>

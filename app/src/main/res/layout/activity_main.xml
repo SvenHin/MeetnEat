@@ -11,6 +11,13 @@
         style="@style/Toolbar"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_width="40dp"
+            android:scaleType="fitCenter"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/pe_launcher_icon"
+            android:elevation="20dp"/>
         <TextView
             style="@style/ToolbarTitle"
             android:text="@string/app_name"
